@@ -9,6 +9,7 @@ apps:
 
   deluged:
     command: bin/deluged.sh
+    daemon: simple
 
 grade: devel
 confinement: devmode

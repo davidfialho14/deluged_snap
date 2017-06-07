@@ -5,5 +5,17 @@ description: |
   This snap package was built to meet a very specific set of requirements. The
   configurations included here may not apply for generic use cases.
 
+apps:
+
+  deluged:
+    command: deluged
+
 grade: devel
 confinement: devmode
+
+parts:
+
+  deluged:
+    plugin: nil
+    stage-packages:
+      - deluged=1.3.12-1ubuntu1

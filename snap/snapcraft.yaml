@@ -8,7 +8,7 @@ description: |
 apps:
 
   deluged:
-    command: deluged
+    command: bin/deluged.sh
 
 grade: devel
 confinement: devmode
@@ -19,3 +19,7 @@ parts:
     plugin: nil
     stage-packages:
       - deluged=1.3.12-1ubuntu1
+
+  configurations:
+    plugin: dump
+    source: .

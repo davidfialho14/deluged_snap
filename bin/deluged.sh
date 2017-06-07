@@ -7,6 +7,8 @@ export LC_ALL=C
 # write some data into it, but it was not able to do so because the directory
 # was missing. Creating the directory solved the issue.
 mkdir -p $SNAP_USER_DATA/.config/deluge/state
+touch $SNAP_USER_DATA/.config/deluge/state/torrents.state
+touch $SNAP_USER_DATA/.config/deluge/state/torrents.fastresume
 
 # Create the auth file which will contain the registered users
 touch $SNAP_USER_DATA/.config/deluge/auth

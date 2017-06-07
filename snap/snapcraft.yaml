@@ -12,8 +12,11 @@ apps:
     daemon: simple
     plugs: [network-bind]
 
+  users:
+    command: bin/users.sh
+
 grade: devel
-confinement: devmode
+confinement: strict
 
 parts:
 

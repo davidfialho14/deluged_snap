@@ -10,6 +10,7 @@ apps:
   deluged:
     command: bin/deluged.sh
     daemon: simple
+    plugs: [network-bind]
 
 grade: devel
 confinement: devmode

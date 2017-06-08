@@ -22,4 +22,4 @@ touch $USERS_FILE
 # Here we let the snap system handle the daemonizing process
 # This approach allows the output of deluged to be directed to systemd and,
 # thereby, when running systemctl status
-$SNAP/usr/bin/deluged -d
+$SNAP/bin/deluged -d

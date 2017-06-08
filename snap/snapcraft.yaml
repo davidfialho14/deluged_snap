@@ -9,10 +9,15 @@ apps:
 
   deluged:
     command: bin/deluged.sh
+    daemon: simple
     plugs: [network-bind]
 
   users:
     command: bin/users.sh
+
+  console:
+    command: deluge-console
+    plugs: [network]
 
 grade: devel
 confinement: strict

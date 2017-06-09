@@ -10,7 +10,7 @@ apps:
   deluged:
     command: bin/deluged.sh
     daemon: simple
-    plugs: [network-bind]
+    plugs: [network-bind, removable-media]
 
   users:
     command: bin/users.sh

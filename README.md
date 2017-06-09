@@ -52,3 +52,18 @@ After having a registered user you can use the 'console' command to manage and c
 
 See https://whatbox.ca/wiki/deluge_console_documentation to learn more about how to use this interface.
 
+## Changing the Download Directory ##
+
+Before starting to download all your torrents, we recommend you changing the default download directory to the directory you want to have deluge download the torrents to. You can configure this using any interface. Here we will use the console interface included in this snap. To set the download directory to '/path/to/downloads/directory' enter the following:
+
+    menta-deluged.console "connect localhost USERNAME PASSWORD; config -s download_location /path/to/downloads/directory"
+    
+The USERNAME and PASSWORD should be replaced by the username and respetive password of a registered user (see  [Configuration and Management](#configuration-and-management)).
+
+## Download Files to External Drive ##
+
+To be able to point your downloads to an external drive you need to give the menta-deluged snap permission to access external drives. To do this enter the following:
+
+    sudo snap connect menta-deluged:removable-media
+    
+Done! Now the menta-deluged snap is able to download your torrents to any external drive. To be more specific, the snap is able to access anything in the '/media/' directory.

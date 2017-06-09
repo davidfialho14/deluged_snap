@@ -105,7 +105,7 @@ function list {
 
   local all_users=$(users)
 
-  if [ -z $all_users ]; then
+  if [ -z "$all_users" ]; then
     echo
     echo "There are no users registered yet"
     echo "Use the following command to create a new user: "

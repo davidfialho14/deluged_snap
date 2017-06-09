@@ -67,3 +67,40 @@ To be able to point your downloads to an external drive you need to give the men
     sudo snap connect menta-deluged:removable-media
     
 Done! Now the menta-deluged snap is able to download your torrents to any external drive. To be more specific, the snap is able to access anything in the '/media/' directory.
+
+## Troubleshooting ##
+
+### I changed the download directory and now all downloads are stuck at 0.00% ###
+
+This happened to me too :-p
+I noticed that deluged is not able to download to a directory owned by a user that is not root. I'm not sure if this issue is related to deluged itself or due to the restrictions imposed on snaps. Regardless, I found a simple solution to the problem: making root the owner of the download directory xD
+Assuming the download directory is '/path/to/downloads/directory' enter the following:
+
+    sudo chown root /path/to/downloads/directory
+
+At this point you should be able to download torrents normally.
+
+However, this does not work very well, because root will be the owner and all the other users will not be able to acccess or modifiy the downloaded files. To fix this, I suggest keeping root as the owner and having a special group for this directory.
+
+To create a new group 'example_g' enter:
+
+    sudo groupadd example_g
+    
+Now change the group of the download directory to the new created group:
+
+    sudo chgrp example_g /path/to/downloads/directory
+
+After entering this command the owner and group of the download directory should be 'root' and 'example_g', respectively.
+Changing the group of the download directory will not affect the group of the new files created by deluged (the downloaded files). At this oint if you download a torrent you'll see that all files are owned by root and their group is also root. Thus, we have the same problem. To fix this, we need to change the default group assinged to new files created on the download directory. This can be done with the following commands:
+
+    sudo chmod g+s /path/to/downloads/directory
+    sudo setfacl -d -m g::rw /path/to/downloads/directory
+
+At this point deluged is downloading files correctly and the downloaded files are owned by root and the group is example_g.
+Now, to give access read and write access to your user just ype the following:
+
+    sudo usermod -a -G example_g YOU_USER
+    
+YOUR_USER should be replace with your username. You may need to logout and login back for the last change to take effect.
+After all this steps your user should be able to manipulate the files downloaded by deluged.
+

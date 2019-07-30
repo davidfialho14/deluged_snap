@@ -43,4 +43,5 @@ parts:
     plugin: dump
     override-build: |
       chmod +x bin/wrapper.sh
+      chmod +x bin/users.sh
       snapcraftctl build

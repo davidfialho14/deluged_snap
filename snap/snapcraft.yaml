@@ -1,33 +1,36 @@
 name: menta-deluged
-version: '1.3.12'
+version: '2.0.3'
 summary: Unofficial snap package for deluge daemon
 description: |
   This snap package was built to meet a very specific set of requirements. The
   configurations included here may not apply for generic use cases.
+base: core18
+grade: stable
+confinement: strict
 
 apps:
-
   deluged:
-    command: bin/deluged.sh
+    command: bin/wrapper.sh
     daemon: simple
-    plugs: [network, network-bind, removable-media]
+    restart-condition: always
+    plugs: 
+      - network
+      - network-bind
+      - removable-media
 
   users:
     command: bin/users.sh
 
   console:
     command: deluge-console
-    plugs: [network]
-
-grade: stable
-confinement: strict
+    plugs: 
+      - network
 
 parts:
-
   deluged:
-    source: http://download.deluge-torrent.org/source/deluge-1.3.12.tar.gz
+    source: http://download.deluge-torrent.org/source/2.0/deluge-$SNAPCRAFT_PROJECT_VERSION.tar.xz
     plugin: python
-    python-version: python2
+    python-version: python3
     python-packages:
       - twisted[tls]
       - pyopenssl
@@ -36,8 +39,11 @@ parts:
       - chardet
     stage-packages:
       - intltool
-      - python-libtorrent
+      - python3-libtorrent
 
-  configurations:
+  wrapper:
+    source: files/
     plugin: dump
-    source: .
+    override-build: |
+      chmod +x bin/wrapper.sh
+      snapcraftctl build

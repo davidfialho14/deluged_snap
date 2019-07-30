@@ -1,5 +1,7 @@
 # Deluge Daemon Snap
 
+[![Snap Status](https://build.snapcraft.io/badge/dfialho/deluged-snap.svg)](https://build.snapcraft.io/user/dfialho/deluged-snap)
+
 Unofficial snap for the deluge daemon
 
 This snap package was built to meet a very specific set of requirements. The
